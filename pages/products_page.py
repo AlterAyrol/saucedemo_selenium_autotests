@@ -6,7 +6,7 @@ import time
 from base.base_class import Base
 
 
-class Product_page(Base):
+class ProductPage(Base):
 
     url = 'https://www.saucedemo.com/inventory.html'
 
