@@ -42,7 +42,6 @@ class Finish_page(Base):
             self.assert_title_word(title_word=self.get_title_word_locator(), expected_result='Checkout: Complete!')
             self.assert_title_word(title_word=self.get_thank_you_locator(), expected_result='Thank you for your order!')
 
-            self.screenshot_saver()
 
             self.click_burger_menu_locator()
             time.sleep(1)
