@@ -1,57 +1,52 @@
-from selenium import webdriver
 import time
 
-from pages.login_page import Login_page
-from pages.products_page import Product_page
+from pages.loginpage import LoginPage
+from pages.products_page import ProductPage
 from pages.curt_page import Curt_page
 from pages.your_information_page import Your_information_page
 from pages.last_page import Last_page
 from pages.finish_page import Finish_page
 
 
+def test_select_product(web_browser):
+    '''Смоук тест по покупке товара, оформлению почтового адреса и оформлению'''
 
-class Test():
+    # user_login_list = ['standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user']
+    user_login_list = ['standard_user']
+    user_password = 'secret_sauce'
 
-    def test_select_product(self):
-        '''Соук тест по покупке товара, оформлению почтового адреса и оформлению'''
+    driver = web_browser
 
-        # user_login_list = ['standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user']
-        user_login_list = ['standard_user']
-        user_password = 'secret_sauce'
+    test_num = 0
 
-        driver = webdriver.Chrome()
+    for user_login in user_login_list:
+        test_num += 1
+        print(f"Start smoke testing №{test_num} with login - {user_login}. Check buy life cycle ")
 
-        test_num = 0
+        login = LoginPage(driver=driver)
+        login.authorization(login_name=user_login, login_password=user_password)
 
-        for user_login in user_login_list:
-            test_num += 1
-            print(f"Start smoke testing №{test_num} with login - {user_login}. Check buy life cycle ")
+        time.sleep(1)
+        product_page = ProductPage(driver=driver)
+        product_page.add_first_product_and_go_to_curt(test_item=test_num)
 
-            login = Login_page(driver=driver)
-            login.authorization(login_name=user_login, login_password=user_password)
+        time.sleep(1)
+        curt_page = Curt_page(driver=driver)
+        curt_page.check_cart_and_go_on()
 
-            time.sleep(1)
-            product_page = Product_page(driver=driver)
-            product_page.add_first_product_and_go_to_curt(test_item=test_num)
+        time.sleep(1)
+        your_information_page = Your_information_page(driver=driver)
+        your_information_page.enter_data_and_go_on()
 
-            time.sleep(1)
-            curt_page = Curt_page(driver=driver)
-            curt_page.check_cart_and_go_on()
+        time.sleep(1)
+        last_page = Last_page(driver=driver)
+        last_page.check_last_page_title_and_go_on()
 
-            time.sleep(1)
-            your_information_page = Your_information_page(driver=driver)
-            your_information_page.enter_data_and_go_on()
+        time.sleep(1)
 
-            time.sleep(1)
-            last_page = Last_page(driver=driver)
-            last_page.check_last_page_title_and_go_on()
+        finish_page = Finish_page(driver=driver)
+        finish_page.check_finish_page_title_and_go_out()
 
-            time.sleep(1)
+        time.sleep(2)
 
-            finish_page = Finish_page(driver=driver)
-            finish_page.check_finish_page_title_and_go_out()
-
-
-            time.sleep(2)
-
-            driver.refresh()
+        driver.refresh()
