@@ -7,7 +7,7 @@ import time
 from base.base_class import Base
 
 
-class Login_page(Base):
+class LoginPage(Base):
 
     url = 'https://www.saucedemo.com/'
 
