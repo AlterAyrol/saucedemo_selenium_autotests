@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -32,8 +33,7 @@ class Finish_page(Base):
 
     # Actions
 
-
-
+    @allure.step('Проверка тайтла страницы')
     def check_finish_page_title_and_go_out(self):
         self.get_current_url()
 
@@ -41,7 +41,6 @@ class Finish_page(Base):
 
             self.assert_title_word(title_word=self.get_title_word_locator(), expected_result='Checkout: Complete!')
             self.assert_title_word(title_word=self.get_thank_you_locator(), expected_result='Thank you for your order!')
-
 
             self.click_burger_menu_locator()
             time.sleep(1)
