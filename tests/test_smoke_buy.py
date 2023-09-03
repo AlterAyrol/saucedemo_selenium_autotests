@@ -1,4 +1,6 @@
 import time
+import allure
+from allure_commons.types import Severity
 
 from pages.loginpage import LoginPage
 from pages.products_page import ProductPage
@@ -8,8 +10,13 @@ from pages.last_page import Last_page
 from pages.finish_page import Finish_page
 
 
+@allure.tag('buy')
+@allure.severity(Severity.CRITICAL)
+@allure.label("owner", "AlterAyrol")
+@allure.epic('Смоук тест по функционал покупки')
+@allure.feature('Смоук тест по покупке товара, оформлению почтового адреса и оформлению')
+@allure.story("Пользователь вводит логин и пароль, покупает товар, вводит адрес доставки и проверяет форму на товар")
 def test_select_product(web_browser):
-    '''Смоук тест по покупке товара, оформлению почтового адреса и оформлению'''
 
     # user_login_list = ['standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user']
     user_login_list = ['standard_user']
