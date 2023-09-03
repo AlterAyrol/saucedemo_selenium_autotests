@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -38,35 +39,35 @@ class LoginPage(Base):
 
     # Actions
 
+    @allure.step('Вводит имя пользователя')
     def input_user_name(self, user_name):
-        print('Input login')
         self.get_user_name().send_keys(user_name)
 
+    @allure.step('Удаляет имя пользователя')
     def clear_user_name(self, user_name):
-        print('Clear login field')
         for _ in range(len(user_name)):
             time.sleep(0.01)
             self.get_user_name().send_keys(Keys.BACKSPACE)
 
+    @allure.step('Удаляет пароль')
     def clear_password(self, login_password):
-        print('Clear password field\n')
         for _ in range(len(login_password)):
             time.sleep(0.01)
             self.get_password().send_keys(Keys.BACKSPACE)
 
+    @allure.step('Вводит пароль')
     def input_password(self, password):
-        print('Input password')
         self.get_password().send_keys(password)
 
+    @allure.step('Нажимает кнопку "login"')
     def click_login_button(self):
-        print('Click login button')
         self.get_login_button().click()
 
 
     # Methods
 
+    @allure.step('Начат метод авторизации')
     def authorization(self, login_name, login_password):
-        print('Авторизация')
 
         self.driver.get(self.url)
         self.driver.maximize_window()
