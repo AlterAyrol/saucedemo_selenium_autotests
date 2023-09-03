@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -45,25 +46,19 @@ class ProductPage(Base):
 
     # Actions
 
+    @allure.step('Нажимает "Add to cart"')
     def click_add_product(self, test_item):
-        print("Click 'add product to cart'")
         self.get_product_list_locator(test_item).click()
 
+    @allure.step('Нажимает на кнопку корзины')
     def click_cart_locator(self):
-        print("Click 'cart'")
         self.get_cart_locator().click()
 
 
-
+    @allure.step('Начат метод который кладёт указанный товар в корзину и переход в вкладку корзина')
     def add_first_product_and_go_to_curt(self, test_item):
-        """
-        Кладёт указанный товар в корзин и переход в вкладку корзина
-        :param test_item:
-        :return:
-        """
-        print(1)
+
         self.get_current_url()
-        print(2)
 
         if self.driver.current_url == self.url:
             self.assert_title_word(title_word=self.get_title_word_locator(), expected_result='Products')
@@ -71,12 +66,8 @@ class ProductPage(Base):
             time.sleep(1)
             self.click_cart_locator()
 
-
+    @allure.step('Начат метод который открывает меню и переходит по ссылке about')
     def open_burger_menu_and_go_to_about(self):
-        '''
-        Открывает меню и переходит по ссылке about
-        :return:
-        '''
         self.click_burger_menu_locator()
         time.sleep(1)
         self.click_about_locator()
