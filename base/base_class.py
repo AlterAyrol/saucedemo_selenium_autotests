@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -30,21 +31,23 @@ class Base:
 
 
     # Actions
+
+    @allure.step('Открывает меню меню')
     def click_burger_menu_locator(self):
-        print('Open burger menu')
         self.get_burger_menu_locator().click()
 
+    @allure.step('Нажимает кнопку logout')
     def click_logout_locator(self):
-        print('Click logout\n')
         self.get_logout_locator().click()
 
+    @allure.step('Нажимает кнопку "about"')
     def click_about_locator(self):
-        print('Click about\n')
         self.get_about_locator().click()
 
 
     """Method to get current URL"""
 
+    @allure.step('Получает текущий url')
     def get_current_url(self):
         get_url = self.driver.current_url
         print('Current URL: ' + get_url)
@@ -52,7 +55,7 @@ class Base:
 
 
     """Method assert title word"""
-
+    @allure.step('Проверка соответствия текста на странице')
     def assert_title_word(self, title_word, expected_result):
         print("Проверка соответствия текста на странице: " + expected_result)
         value_word = title_word.text
@@ -68,6 +71,7 @@ class Base:
 
 
     """Method asser url"""
+    @allure.step('Проверка url')
     def asser_url(self, expected_result):
         get_url = self.driver.current_url
         print('Проверка url')
