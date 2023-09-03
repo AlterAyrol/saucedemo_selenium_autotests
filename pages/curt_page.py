@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -30,12 +31,12 @@ class Curt_page(Base):
 
     # Actions
 
+    @allure.step('Нажмает checkout')
     def click_checkout(self):
-        print('Click checkout')
         self.get_checkout_locator().click()
 
 
-
+    @allure.step('Проверка тайтла страницы')
     def check_cart_and_go_on(self):
         self.get_current_url()
 
