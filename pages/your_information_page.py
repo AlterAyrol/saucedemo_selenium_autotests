@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -44,24 +45,25 @@ class Your_information_page(Base):
 
     # Actions
 
+
+    @allure.step('Вводит имя')
     def input_first_name(self):
-        print('Input first name')
         self.get_first_name_locator().send_keys('Qqq')
 
+    @allure.step('Вводит фамилию')
     def input_last_name(self):
-        print('Input last name')
         self.get_last_name_locator().send_keys('Www')
 
+    @allure.step('Вводит zip')
     def input_zip(self):
-        print('Input zip')
         self.get_zip_locator().send_keys('EEE')
 
+    @allure.step('Нажимает продолжить')
     def click_continue_locator(self):
-        print('Click continue')
         self.get_continue_locator().click()
 
 
-
+    @allure.step('Проверка тайтла страницы')
     def enter_data_and_go_on(self):
         self.get_current_url()
 
